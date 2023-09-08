@@ -6,9 +6,6 @@ import random
 import sys
 import os
 
-
-
-
 def main():
     quiz_game()
 
@@ -22,12 +19,12 @@ Quiz = type 'Quiz'
 
     match user_input:
         
-        case "add":
+        case "add": # Adding new words start
             
             while True:
                 try:
 
-                    if os.path.exists(FILE_NAME):
+                    if os.path.exists(FILE_NAME): #checks if file dose exist if not rasies an error
                         word_translation = input("Give word and it's translation 'word,translation' make sure to spell it correcly: ").strip()
                         regex = re.search("(.+ )?.+,.+", word_translation)
                         if regex:
@@ -39,20 +36,20 @@ Quiz = type 'Quiz'
                     else:
                         sys.exit("File dose not exists")
 
-                except KeyboardInterrupt:
-                    sys.exit("\nYou stopped the program")
+                except KeyboardInterrupt:#Stops the program, ctrl + c
+                    sys.exit("\nYou stopped the program") 
 
-        case "quiz":
+        case "quiz": #Quiz game start
             quiz()
 
-def write_file(file_name, word, translation):
+def write_file(file_name, word, translation): # Writes words in to csv file 
     with open(file_name, "a") as csvfile:
         fieldnames = ["word", "translation"]
         writer = csv.DictWriter(csvfile, fieldnames = fieldnames, lineterminator= "\n")
 
         writer.writerow({'word': word, 'translation': translation})
 
-def open_chcek_file(file_name, word, translation):
+def open_chcek_file(file_name, word, translation): # Opens and check if word exists in csv file 
     with open(file_name) as csvfile:
         lines = csv.DictReader(csvfile)
 
@@ -64,11 +61,11 @@ def open_chcek_file(file_name, word, translation):
             print("Word already exists")
             pass
            
-def split(word_translation):
+def split(word_translation): #Splits word in to two
     word, translation = word_translation.split(",")
     return word, translation
 
-def quiz():
+def quiz(): #Quiz game 
     with open(FILE_NAME) as csvfile:
         reader = csv.DictReader(csvfile)
     
@@ -76,6 +73,8 @@ def quiz():
             print(row['word'])
 
     
+
+
 
 
 
