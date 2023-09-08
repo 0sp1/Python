@@ -65,12 +65,28 @@ def split(word_translation): #Splits word in to two
     word, translation = word_translation.split(",")
     return word, translation
 
-def quiz(): #Quiz game 
-    with open(FILE_NAME) as csvfile:
-        reader = csv.DictReader(csvfile)
+
+
+
+
+
+
+def quiz(): #Quiz game
+    words = {}
+    score = 0
+    rounds = input("\nHow many rounds would you like to play: ")
+    if rounds.isdigit():
+        rounds = int(rounds)
+        with open(FILE_NAME) as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                words[row['word']] = row['translation']
+        print(words)
+    else:
+        print("Numbers of rounds must to be intager ")
+
+
     
-        for row in reader:
-            print(row['word'])
 
     
 
