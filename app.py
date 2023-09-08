@@ -65,12 +65,6 @@ def split(word_translation): #Splits word in to two
     word, translation = word_translation.split(",")
     return word, translation
 
-
-
-
-
-
-
 def quiz(): #Quiz game
     words = {}
     score = 0
