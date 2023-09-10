@@ -97,26 +97,12 @@ def quiz(): #Quiz game
                         break
         print(f"Your score is: {score}")
 
-
-                    
-                
-
-
-
-
     else:
         print("Numbers of rounds must to be intager ")
 
-
-    
-    
 def get_word_and_translation(words):
     random_key = random.choice(list(words.keys()))
     translation = words.get(random_key)
     return random_key, translation
-
-
-
-
 
 main()
