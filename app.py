@@ -41,6 +41,8 @@ Quiz = type 'Quiz'
 
         case "quiz": #Quiz game start
             quiz()
+        case _ :
+            sys.exit("Invalid input")
 
 def write_file(file_name, word, translation): # Writes words in to csv file 
     with open(file_name, "a") as csvfile:
@@ -71,19 +73,47 @@ def quiz(): #Quiz game
     rounds = input("\nHow many rounds would you like to play: ")
     if rounds.isdigit():
         rounds = int(rounds)
-        with open(FILE_NAME) as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                words[row['word']] = row['translation']
-        print(words)
+        for _ in range(rounds):
+            with open(FILE_NAME) as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    words[row['word']] = row['translation']
+
+            word, translation = get_word_and_translation(words)
+            user = input(f"{word} = ")
+
+            if user == translation:
+                score += 1
+                os.system("cls")
+            else:
+                trys = 3
+                for _ in range(3):
+                    print(f"Wrong answer you have {trys} left ")
+                    user = input(f"{word} = ")
+                    if not user == translation:
+                        trys -= 1
+                        os.system("cls")
+                    else:
+                        break
+        print(f"Your score is: {score}")
+
+
+                    
+                
+
+
+
+
     else:
         print("Numbers of rounds must to be intager ")
 
 
     
-
     
-
+def get_word_and_translation(words):
+    random_key = random.choice(list(words.keys()))
+    translation = words.get(random_key)
+    return random_key, translation
 
 
 
